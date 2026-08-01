@@ -1,4 +1,8 @@
-# Users Register Endpoint
+# Uber Clone — Backend API Docs
+
+
+
+## 1. Users Register
 
 Endpoint: `POST /users/register`
 
