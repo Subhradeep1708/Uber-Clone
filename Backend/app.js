@@ -3,15 +3,16 @@ dotenv.config()
 const express = require('express')
 const cors = require('cors')
 const app = express()
+const cookieParser = require('cookie-parser')
 const dbConnect = require('./db/db')
 const userRoutes = require('./routes/user.routes')
 
-dbConnect()
-
+app.use(cookieParser())
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
+dbConnect()
 
 app.get('/', (req, res) => {
     res.send('hello')
