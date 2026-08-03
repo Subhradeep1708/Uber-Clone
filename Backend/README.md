@@ -159,3 +159,42 @@ Example success response:
 
 **Notes**
 - The login flow looks up the user by email, selects the stored password for comparison, and returns a JWT token on success.
+
+## 3. Users Logout
+
+Endpoint: `GET /users/logout`
+
+**Description:**
+- Logs out the authenticated user by clearing the cookie token and blacklisting the current JWT.
+
+**Request URL**
+- GET `/users/logout`
+
+**Authentication**
+- Requires a valid JWT token sent either as the `token` cookie or as a Bearer token in the `Authorization` header.
+
+**Example cURL**
+
+```bash
+curl -X GET http://localhost:3000/users/logout \
+  -H "Authorization: Bearer your-jwt-token"
+```
+
+**Successful Response (200 OK)**
+- Returns a confirmation message after the token has been added to the blacklist.
+
+Example success response:
+
+```json
+{
+  "message": "Logged out successfully"
+}
+```
+
+**Other status codes**
+- `400 Bad Request` — no token was provided.
+- `401 Unauthorized` — missing, invalid, or blacklisted token.
+- `500 Internal Server Error` — unexpected server errors.
+
+**Notes**
+- The token is stored in the blacklist collection and is automatically removed after 24 hours.
